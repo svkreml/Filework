@@ -6,6 +6,7 @@ void main()
 	setlocale(LC_ALL, "Russian");
 	string name;
 	name="File.db";
+	//lololo
 	//FileWork::Create(name);
 	//FileWork::Move(name,3, 6);
 	//cout << (FileWork::Read(7, 10)) << endl;
