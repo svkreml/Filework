@@ -7,7 +7,7 @@ void main()
 	string name;
 	name="File.db";
 	//FileWork::Create(name);
-	
+	//21:39
 	//FileWork::Move(name,3, 6);
 	//cout << (FileWork::Read(7, 10)) << endl;
 	//FileWork::IndexWrite(name,0, 0, 0, 0, 0, 0);
