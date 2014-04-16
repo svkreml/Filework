@@ -14,7 +14,7 @@ void main()
 	FileWork::Changename(name,"All works well");
 	//FileWork::IndexRead(name);
 	//cout << FileWork::IndexSize(name) << endl;
-	
+	//new massage
 	//FileWork::Write(name, "Note number one", FileWork::IndexSize(name));
 	//cout << FileWork::Read(name, FileWork::IndexSize(name));
 	system("pause");
