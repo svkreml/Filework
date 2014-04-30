@@ -1,10 +1,10 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <windows.h>
+//#include <fstream>
+//#include <iostream>
+//#include <string>
+//#include <windows.h>
 
 
-using namespace std;
+//using namespace std;
 
 namespace FileWork
 {
@@ -32,13 +32,13 @@ namespace FileWork
 	{
 		int recordsize;
 		fstream ofs (name, fstream::in | fstream::out | fstream::binary);
+		ofs.seekg(recordposition, ios::beg); // указатель ввода на recordposition от начала файла
+		ofs.seekp(0, ios::end); // указатель вывода на конец файла
+		recordsize = ofs.tellp();                    // размер записи равен конеч. позиции
+		recordsize -= recordposition - 1;            // минус (recordposition - 1). ПОЧЕМУ -1???
+		char *record = new char[recordsize];         // выделяется массив размера recordsize
 		ofs.seekg(recordposition, ios::beg);
-		ofs.seekp(0, ios::end);
-		recordsize = ofs.tellp();
-		recordsize -= recordposition - 1;
-		char *record = new char[recordsize];
-		ofs.seekg(recordposition, ios::beg);
-		ofs.get(record, recordsize);
+		ofs.get(record, recordsize);                          // берем кусок, записываем в рекорд
 		ofs.seekp(recordposition + recordmove, ios::beg);
 		ofs.write(record, recordsize-1);
 		if (recordmove < 0) {
