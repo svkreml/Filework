@@ -8,10 +8,116 @@
 
 namespace FileWork
 {
-	
+	class Column {
+		string name; // имя столбца
+		//string path; // путь к файлу
+	public:
+		string path;
+		Column() {}
 		
+		void Column_create(string db_name) // создание файла с указанным именем...
+		{
+			cout << "Введите имя столбца: "; cin >> name;
+			path = "D:\\" + db_name + "." + name;
+			ifstream ofs(path);
+			if (ofs) {
+				cout << "Ошибка создания" << endl;
+				ofs.close();
+				//return 0;
+			}
+			else {
+				ofstream ofs(path);
+				cout << "Файл " << name << " cоздан" << endl;
+				ofs.close();
+				//return 1;
+			}
+		}
+
+		void IndexWrite(string name, unsigned int mn, unsigned int count, unsigned short sizename,
+			unsigned short sizep, unsigned char typep, unsigned char reserve)         // пишем индекс
+		{
+			char magic[14] = { mn >> (24), mn >> (16), mn >> (8), mn, count >> (24),
+				count >> (16), count >> (8), count,
+				sizename >> (8), sizename, sizep >> (8), sizep, typep, reserve };
+			ofstream ofs(name, fstream::in);
+			//ofs.seekp(0, ios::beg); //- наверное не нужна
+			ofs.write(magic, 14);
+			cout << "Создание заголовка" << endl;
+			//IndexRead(name);
+			ofs.close();
+		}
+
+		void Write()
+		{
+			ofstream ofs(path, fstream::in | fstream::binary);
+			
+			char dec;
+			do {
+				int number;
+				cout << "Number: "; cin >> number;
+				static int recordpos = 14;
+				char magic[4] = { number >> 24, number >> 16, number >> 8, number };
+				ofs.write(magic, 2);
+				cout << "Запись Int " << number << endl;
+				recordpos += 5;
+				cout << "Continue? (y/n) "; cin >> dec;
+			} while (dec != 'n');
+			ofs.close();
+		}
+
+		void ReadInt() // выводит не то, скорее всего, дело в преобразовании...
+		{
+			//char output[4];
+			ifstream ofs(path, fstream::out | fstream::binary);
+
+			char output[4];
+			static int readpos = 14;
+			ofs.seekg(readpos, ios::beg);
+			ofs.read(output, 4);
+			cout << ((int)((unsigned char)(output[0]) << 24) + (int)((unsigned char)(output[1]) << 16) + (int)((unsigned char)(output[2]) << 8) + (int)((unsigned char)(output[3]))) << endl;
+			readpos += 4;
+
+			
+			
+		}
+		//friend string_col;
+
+	};
+
+	void string_wrt(Column col) {
+		fstream ofs(col.path);
+		char dec = 'y';
+		while (dec != 'n') {
+			//static int position = ofs.tellg();
+			//ofs.seekg(14, ios::beg);
+			string rec;
+			cout << "Введите данные: "; cin >> rec;
+			ofs << rec << " ";
+			//ofs.write(0, 1);
+			//position += rec.length() + 1;
+			cout << "Writing" << endl;
+			cout << "Continue? (y/n) "; cin >> dec;
+		}
+
+		/*void string_read(Column col) {
+			fstream ofs(col.path);
+			
+		}*/
+
+		ofs.close();
+	}
+		
+
+		//friend Column;
+	
+
+
+		
+	
+	
+	
 	//Создание нового файла(не срабатывает, если файл существует)(возвращает  0 или 1) как-то странно выходит, переделать...
-	bool Create(string name)
+	 /* bool Create(string name)
 	{
 		ifstream ofs(name);
 		if (ofs) {
@@ -26,7 +132,7 @@ namespace FileWork
 			return 1;
 		}
 		
-	}
+	} */
 	//Перемещение части кода, для изменения, добавления в центр или удаления записей, вида(файл,позиция, сдвиг),(если файл больше ОЗУ, наверное, так делать не стоит.)
 	void Move(string name, int recordposition, int recordmove)
 	{
@@ -69,7 +175,8 @@ namespace FileWork
 		cout << "---: " << (int)(magic[13]) << endl;
 	}
 	//Заполнение заголовка(запуск в заполненом файле приведёт к его порче);      magic begins here...
-	void IndexWrite(string name, unsigned int mn, unsigned int count, unsigned short sizename,
+	
+	/*void IndexWrite(string name, unsigned int mn, unsigned int count, unsigned short sizename,
 		unsigned short sizep, unsigned char typep, unsigned char reserve)
 	{
 		char magic[14] = { mn >> (24), mn >> (16), mn >> (8), mn, count >> (24),
@@ -81,7 +188,8 @@ namespace FileWork
 		cout << "Создание заголовка" << endl;
 		IndexRead(name);
 		ofs.close();
-	}
+	}*/
+
 	// Чтение из заголовка на экран;    просмотр функции опасен для моска (фунуция как таковая не требуется, и находится здесь лишь в целял устрашения)
 	
 	//считывает int с текущей позиции
