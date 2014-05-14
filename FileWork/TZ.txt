@@ -15,3 +15,10 @@ IndexWrite(Magic number, количество записей(должно обрабатываться само),
 
 
 FileWork::IntexSize - указатель первой записи
+ Байт тип записей:
+ 0	shortint
+ 1	int
+ 2	fix string
+ 3	dynamic string
+ 4	char
+ 5	invent smth...
