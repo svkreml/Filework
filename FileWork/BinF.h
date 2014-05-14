@@ -8,6 +8,8 @@
 using namespace std;
 string path;
 fstream fs(path, ios::binary | ios::out | ios::in);
+fstream fs0(path, ios::binary | ios::out | ios::in);
+fstream fs1(path, ios::binary | ios::out | ios::in);
 namespace BinF
 { 
 	//---------------
@@ -125,13 +127,74 @@ namespace BinF
 	//--------------Index}
 	void Readall()//string
 	{
-		int recpos=14+Reads(8);
-		for (unsigned int i = 1; i = Readi(4); i++)
+		char factor = Readc(12);
+		unsigned int count = Readi(4);
+		int recpos = 14 + Reads(8);
+		if (factor == 3)
 		{
-			cout <<i<<")   "<< Readstr(recpos)<< endl;
-			recpos = fs.tellp();
+			
+			for (unsigned int i = 1; i = count ; i++)
+			{
+				cout << i << ")   " << Readstr(recpos) << endl;
+				recpos = fs.tellp();
+			}
 		}
+		else if (factor == 0)
+			for (unsigned int i = 1; i = count; i++)
+			{
+				cout << i << ")   " << Reads(recpos) << endl;
+				recpos = fs.tellp();
+			}
+		else if (factor == 1)
+			for (unsigned int i = 1; i = count; i++)
+			{
+			cout << i << ")   " << Readi(recpos) << endl;
+			recpos = fs.tellp();
+			}
+		// e.t.c. ...
+	}
 
-
+	//-------------------Add{
+	void Add(string str)
+	{
+		unsigned int count = Readi(4);
+		Write(count+1,4);
+		fs.seekp(0, ios::end);
+		Write(str.length(), fs.tellp());
+		Write(str,fs.tellp());
+	}
+	void Add(int str)
+	{
+		unsigned int count = Readi(4);
+		Write(count + 1, 4);
+		fs.seekp(0, ios::end);
+		Write(str, fs.tellp());
+	}
+	void Add(short str)
+	{
+		unsigned int count = Readi(4);
+		Write(count + 1, 4);
+		fs.seekp(0, ios::end);
+		Write(str, fs.tellp());
+	}
+	void Add(char str)
+	{
+		unsigned int count = Readi(4);
+		Write(count + 1, 4);
+		fs.seekp(0, ios::end);
+		Write(str, fs.tellp());
+	}
+	//-------------------Add}
+	void Sort(string column, string key)
+	{
+		unsigned int count = Readi(4);
+		int x=0; 
+		for (unsigned int i = 1; i = count; i++)
+		{
+			if (Readstr(14 + Reads(8)+ x)== key) 
+			{
+				Write(i,4*i);// писать размер строки в то же файл крайне глупо..., легче писать в другой...
+			}
+		}
 	}
 }

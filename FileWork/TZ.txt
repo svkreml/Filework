@@ -22,3 +22,6 @@ FileWork::IntexSize - указатель первой записи
  3	dynamic string
  4	char
  5	invent smth...
+ fs0 -  базовый файл индекса 
+ fs1 -  базовый файл нумерации и  сортировки
+ fs2-fs10 - столбцы бд
