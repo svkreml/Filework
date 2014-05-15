@@ -1,0 +1,10 @@
+struct Table {
+std::string filename;
+FILE *fd;
+};
+std::list<Table*> TableIn
+
+
+
+std::qsort()  - сортировка...
+
