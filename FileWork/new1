@@ -2,9 +2,32 @@ struct Table {
 std::string filename;
 FILE *fd;
 };
-std::list<Table*> TableIn
+std::list<Table*> TableInfo;
+
+
+
+
+
+
+
 
 
 
 std::qsort()  - сортировка...
 
+
+std::vector<Element<_Type>>Elements;
+
+Elements<int> elems;
+
+
+class FileTable {
+std::fstream _file;
+public:
+FileTable(std::string &filename) {
+_file.open(...)
+}
+
+~FileTable() {
+_file.close();
+}
