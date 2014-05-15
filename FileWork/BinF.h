@@ -1,6 +1,3 @@
-//Файл в посторении более не учавствует ибо я в нём запутался
-
-
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -16,13 +13,13 @@ namespace BinF
 	void Move(int recordposition, int recordmove)
 	{
 		int recordsize;
-		fs.seekg(recordposition, ios::beg); // указатель ввода на recordposition от начала файла
-		fs.seekp(0, ios::end); // указатель вывода на конец файла
-		recordsize = fs.tellp();                    // размер записи равен конеч. позиции
-		recordsize -= recordposition - 1;            // минус (recordposition - 1). ПОЧЕМУ -1???
-		char *record = new char[recordsize];         // выделяется массив размера recordsize
+		fs.seekg(recordposition, ios::beg); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ recordposition пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+		fs.seekp(0, ios::end); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+		recordsize = fs.tellp();                    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		recordsize -= recordposition - 1;            // пїЅпїЅпїЅпїЅпїЅ (recordposition - 1). пїЅпїЅпїЅпїЅпїЅпїЅ -1???
+		char *record = new char[recordsize];         // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ recordsize
 		fs.seekg(recordposition, ios::beg);
-		fs.get(record, recordsize);                          // берем кусок, записываем в рекорд
+		fs.get(record, recordsize);                          // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		fs.seekp(recordposition + recordmove, ios::beg);
 		fs.write(record, recordsize - 1);
 		if (recordmove < 0) {
@@ -30,7 +27,7 @@ namespace BinF
 			if (hFile != INVALID_HANDLE_VALUE) {
 				SetFilePointer(hFile, fs.tellp(), NULL, FILE_BEGIN);
 				SetEndOfFile(hFile);
-				CloseHandle(hFile); //уменьшить размер файла
+				CloseHandle(hFile); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 			}
 		}
 		delete[]record;
@@ -193,7 +190,7 @@ namespace BinF
 		{
 			if (Readstr(14 + Reads(8)+ x)== key) 
 			{
-				Write(i,4*i);// писать размер строки в то же файл крайне глупо..., легче писать в другой...
+				Write(i,4*i);// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ..., пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ...
 			}
 		}
 	}
