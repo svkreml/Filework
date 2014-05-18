@@ -10,6 +10,12 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="filetable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="filetable.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{98FD0D99-CE0A-419B-92A1-8A4A0CE9BFBB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
