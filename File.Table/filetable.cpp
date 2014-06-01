@@ -24,7 +24,7 @@ FileImpl *
 FileImpl::create(const std::string &filename, const std::string &name, Type type, int size, bool is_required)
 {
 	FileImpl *impl = new FileImpl(filename);
-	impl->_fd = fopen(filename.c_str(), "w+");
+	impl->_fd = fopen(filename.c_str(), "w+b");
 	if (impl->_fd == NULL) {
 		impl->close();
 		return NULL;
@@ -54,7 +54,7 @@ FileImpl::open()
 {
 	if (is_open())
 		close();
-	_fd = fopen(_filename.c_str(), "r+");
+	_fd = fopen(_filename.c_str(), "r+b");
 	if (_fd == NULL)
 		return false;
 	_is_table = read_head();
